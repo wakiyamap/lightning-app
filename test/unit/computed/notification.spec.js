@@ -1,11 +1,14 @@
 import { Store } from '../../../src/store';
 import ComputedNotification from '../../../src/computed/notification';
+import NavAction from '../../../src/action/nav';
 
 describe('Computed Notification Unit Tests', () => {
   let store;
+  let nav;
 
   beforeEach(() => {
     store = new Store();
+    nav = new NavAction(store);
   });
 
   describe('ComputedNotification()', () => {
@@ -56,6 +59,12 @@ describe('Computed Notification Unit Tests', () => {
         },
       ]);
       expect(store.notificationCountLabel, 'to equal', '2');
+    });
+
+    it('should zero notification count after navigating to view', () => {
+      nav.goNotifications();
+      ComputedNotification(store);
+      expect(store.notificationCountLabel, 'to equal', '0');
     });
   });
 });

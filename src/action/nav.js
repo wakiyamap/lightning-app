@@ -123,6 +123,7 @@ class NavAction {
   }
 
   goNotifications() {
+    this._store.showNtfnCount = false;
     this._store.route = 'Notifications';
   }
 

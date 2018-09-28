@@ -36,6 +36,7 @@ describe('Action Notification Unit Tests', () => {
       expect(log.error, 'was not called');
       await nap(10);
       expect(store.notifications[0].display, 'to be', false);
+      expect(store.showNtfnCount, 'to be', true);
     });
 
     it('create warning notification when type is set', () => {

@@ -71,6 +71,7 @@ export class Store {
       paymentRequest: null,
       seedMnemonic: [],
       notifications: [],
+      showNtfnCount: true,
       logs: '',
 
       // Persistent data
