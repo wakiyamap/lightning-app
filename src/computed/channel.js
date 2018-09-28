@@ -27,7 +27,14 @@ const ComputedChannel = store => {
     channelBalanceOpenLabel: computed(() => {
       const { channels, settings } = store;
       const sum = (channels || [])
-        .map(c => Number(c.localBalance))
+        .map(c => (c.active ? Number(c.localBalance) : 0))
+        .reduce((a, b) => a + b, 0);
+      return toAmountLabel(sum, settings);
+    }),
+    channelBalanceInactiveLabel: computed(() => {
+      const { channels, settings } = store;
+      const sum = (channels || [])
+        .map(c => (!c.active ? Number(c.localBalance) : 0))
         .reduce((a, b) => a + b, 0);
       return toAmountLabel(sum, settings);
     }),
