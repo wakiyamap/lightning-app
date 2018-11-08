@@ -32,35 +32,46 @@ const styles = StyleSheet.create({
   },
 });
 
-const RestoreSeedView = ({ store, wallet }) => (
-  <Background image="purple-gradient-bg">
-    <Header>
-      <BackButton onPress={() => wallet.initPrevRestorePage()} />
-      <Button disabled onPress={() => {}} />
-    </Header>
-    <MainContent style={styles.content}>
-      <View>
-        <H1Text style={styles.title}>Restore your wallet</H1Text>
-      </View>
-      <Card style={styles.card}>
-        <FormSubText>{store.restoreVerifyCopy}</FormSubText>
-        {store.restoreVerifyIndexes.map((seedIndex, i) => (
-          <SeedEntry
-            seedIndex={seedIndex}
-            value={store.wallet.restoreSeed[seedIndex - 1]}
-            onChangeText={word =>
-              wallet.setRestoreSeed({ word, index: seedIndex - 1 })
-            }
-            key={i}
-            autoFocus={i === 0}
-            onSubmitEditing={() => wallet.initNextRestorePage()}
-          />
-        ))}
-      </Card>
-      <GlasButton onPress={() => wallet.initNextRestorePage()}>Next</GlasButton>
-    </MainContent>
-  </Background>
-);
+class RestoreSeedView extends React.Component {
+  initNextPage() {
+    this.props.wallet.initNextRestorePage();
+    this._input.focus();
+  }
+
+  render() {
+    const { store, wallet } = this.props;
+    return (
+      <Background image="purple-gradient-bg">
+        <Header>
+          <BackButton onPress={() => wallet.initPrevRestorePage()} />
+          <Button disabled onPress={() => {}} />
+        </Header>
+        <MainContent style={styles.content}>
+          <View>
+            <H1Text style={styles.title}>Restore your wallet</H1Text>
+          </View>
+          <Card style={styles.card}>
+            <FormSubText>{store.restoreVerifyCopy}</FormSubText>
+            {store.restoreVerifyIndexes.map((seedIndex, i) => (
+              <SeedEntry
+                seedIndex={seedIndex}
+                value={store.wallet.restoreSeed[seedIndex - 1]}
+                onChangeText={word =>
+                  wallet.setRestoreSeed({ word, index: seedIndex - 1 })
+                }
+                key={i}
+                autoFocus={i === 0}
+                ref={component => (i === 0 ? (this._input = component) : null)}
+                onSubmitEditing={() => wallet.initNextRestorePage()}
+              />
+            ))}
+          </Card>
+          <GlasButton onPress={() => this.initNextPage()}>Next</GlasButton>
+        </MainContent>
+      </Background>
+    );
+  }
+}
 
 RestoreSeedView.propTypes = {
   store: PropTypes.object.isRequired,

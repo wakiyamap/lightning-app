@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { Text as RNText, StyleSheet, View } from 'react-native';
 import PropTypes from 'prop-types';
 import Text from './text';
@@ -44,9 +44,22 @@ const inputStyles = StyleSheet.create({
   },
 });
 
-export const InputField = ({ style, ...props }) => (
-  <TextInput style={[inputStyles.input, style]} {...props} />
-);
+export class InputField extends Component {
+  focus() {
+    this._input.focus();
+  }
+
+  render() {
+    const { style, ...props } = this.props;
+    return (
+      <TextInput
+        style={[inputStyles.input, style]}
+        ref={component => (this._input = component)}
+        {...props}
+      />
+    );
+  }
+}
 
 InputField.propTypes = {
   children: PropTypes.string,

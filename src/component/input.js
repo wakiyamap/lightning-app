@@ -20,16 +20,26 @@ const baseStyles = StyleSheet.create({
   },
 });
 
-export const TextInput = ({ style, ...props }) => (
-  <RNTextInput
-    style={[baseStyles.input, style]}
-    autoCorrect={false}
-    autoCapitalize="none"
-    underlineColorAndroid="rgba(0,0,0,0)"
-    placeholderTextColor={color.greyPlaceholder}
-    {...props}
-  />
-);
+export class TextInput extends Component {
+  focus() {
+    this._input.focus();
+  }
+
+  render() {
+    const { style, ...props } = this.props;
+    return (
+      <RNTextInput
+        style={[baseStyles.input, style]}
+        autoCorrect={false}
+        autoCapitalize="none"
+        underlineColorAndroid="rgba(0,0,0,0)"
+        placeholderTextColor={color.greyPlaceholder}
+        ref={component => (this._input = component)}
+        {...props}
+      />
+    );
+  }
+}
 
 TextInput.propTypes = {
   style: RNText.propTypes.style,

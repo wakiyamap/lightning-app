@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { StyleSheet, View } from 'react-native';
 import PropTypes from 'prop-types';
 import { Text } from '../component/text';
@@ -31,12 +31,25 @@ const entryStyles = StyleSheet.create({
   },
 });
 
-const SeedEntry = ({ seedIndex, ...props }) => (
-  <View style={entryStyles.wrapper}>
-    <Text style={entryStyles.index}>{seedIndex}.</Text>
-    <InputField style={entryStyles.input} {...props} />
-  </View>
-);
+class SeedEntry extends Component {
+  focus() {
+    this._input.focus();
+  }
+
+  render() {
+    const { seedIndex, ...props } = this.props;
+    return (
+      <View style={entryStyles.wrapper}>
+        <Text style={entryStyles.index}>{seedIndex}.</Text>
+        <InputField
+          ref={component => (this._input = component)}
+          style={entryStyles.input}
+          {...props}
+        />
+      </View>
+    );
+  }
+}
 
 SeedEntry.propTypes = {
   seedIndex: PropTypes.number,
