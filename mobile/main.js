@@ -3,6 +3,7 @@ import { Clipboard } from 'react-native';
 import { createStackNavigator } from 'react-navigation';
 import FontLoader from './component/font-loader';
 
+import SelectSeedView from '../src/view/select-seed';
 import SetPasswordView from '../src/view/set-password-mobile';
 import SetPasswordConfirmView from '../src/view/set-password-confirm-mobile';
 import SeedSuccessView from '../src/view/seed-success';
@@ -60,6 +61,10 @@ const channel = new ChannelAction(store, grpc, nav, notify);
 sinon.stub(channel, 'update');
 sinon.stub(channel, 'connectAndOpen');
 sinon.stub(channel, 'closeSelectedChannel');
+
+const SelectSeed = () => (
+  <SelectSeedView store={store} wallet={wallet} nav={nav} />
+);
 
 const SetPassword = () => (
   <SetPasswordView store={store} wallet={wallet} nav={nav} />
@@ -119,6 +124,7 @@ const Pay = () => <PaymentView store={store} payment={payment} nav={nav} />;
 
 const MainStack = createStackNavigator(
   {
+    SelectSeed,
     SetPassword,
     SetPasswordConfirm,
     SeedSuccess,
