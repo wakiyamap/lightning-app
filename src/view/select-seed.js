@@ -44,7 +44,7 @@ const styles = createStyles(
   })
 );
 
-const SelectSeedView = ({ store, wallet, nav }) => (
+const SelectSeedView = ({ store, wallet }) => (
   <Background color={color.blackDark}>
     <MainContent style={styles.content}>
       <H1Text style={styles.header}>Recovery phrase?</H1Text>
@@ -69,7 +69,7 @@ const SelectSeedView = ({ store, wallet, nav }) => (
     </MainContent>
     <GlasButton
       onPress={() =>
-        store.wallet.restoring ? wallet.initRestoreWallet() : nav.goSeed()
+        store.wallet.restoring ? wallet.initRestoreWallet() : wallet.initSeed()
       }
     >
       Next

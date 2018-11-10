@@ -4,6 +4,7 @@ import { createStackNavigator } from 'react-navigation';
 import FontLoader from './component/font-loader';
 
 import SelectSeedView from '../src/view/select-seed';
+import SeedView from '../src/view/seed-mobile';
 import SetPasswordView from '../src/view/set-password-mobile';
 import SetPasswordConfirmView from '../src/view/set-password-confirm-mobile';
 import SeedSuccessView from '../src/view/seed-success';
@@ -66,6 +67,8 @@ const SelectSeed = () => (
   <SelectSeedView store={store} wallet={wallet} nav={nav} />
 );
 
+const Seed = () => <SeedView store={store} wallet={wallet} />;
+
 const SetPassword = () => (
   <SetPasswordView store={store} wallet={wallet} nav={nav} />
 );
@@ -125,6 +128,7 @@ const Pay = () => <PaymentView store={store} payment={payment} nav={nav} />;
 const MainStack = createStackNavigator(
   {
     SelectSeed,
+    Seed,
     SetPassword,
     SetPasswordConfirm,
     SeedSuccess,
@@ -192,6 +196,32 @@ store.channelBalanceSatoshis = 59876000;
 store.settings.exchangeRate.usd = 0.00016341;
 store.settings.exchangeRate.eur = 0.0001896;
 store.settings.exchangeRate.gbp = 0.00021405;
+store.seedMnemonic = [
+  'empower',
+  'neglect',
+  'experience',
+  'elevator',
+  'entropy',
+  'future',
+  'trust',
+  'swift',
+  'pluck',
+  'easy',
+  'kite',
+  'measure',
+  'engage',
+  'settle',
+  'dog',
+  'manager',
+  'tool',
+  'fan',
+  'neglect',
+  'conduct',
+  'blouse',
+  'stone',
+  'quit',
+  'cashew',
+];
 store.logs = [
   '[14:00:24.995] [info] Using lnd in path lnd',
   'Checking for update',
