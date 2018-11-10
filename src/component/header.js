@@ -63,6 +63,7 @@ const titleStyles = StyleSheet.create({
     alignItems: 'center',
   },
   title: {
+    textAlign: 'center',
     fontFamily: 'OpenSans Regular',
     fontSize: 15,
     letterSpacing: 2,
@@ -73,7 +74,7 @@ const titleStyles = StyleSheet.create({
   },
 });
 
-export const Title = ({ title = '', style, children }) => (
+export const Title = ({ title = '', style, keepCase, children }) => (
   <View style={titleStyles.titleWrapper}>
     {children}
     <Text
@@ -83,7 +84,7 @@ export const Title = ({ title = '', style, children }) => (
         style,
       ]}
     >
-      {title.toUpperCase()}
+      {keepCase ? title : title.toUpperCase()}
     </Text>
   </View>
 );
@@ -91,6 +92,7 @@ export const Title = ({ title = '', style, children }) => (
 Title.propTypes = {
   title: PropTypes.string,
   style: View.propTypes.style,
+  keepCase: PropTypes.bool,
   children: PropTypes.node,
 };
 
