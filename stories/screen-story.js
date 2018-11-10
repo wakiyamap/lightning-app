@@ -44,6 +44,7 @@ import LoaderSyncing from '../src/view/loader-syncing';
 import SelectSeed from '../src/view/select-seed';
 import SeedSuccess from '../src/view/seed-success';
 import Seed from '../src/view/seed';
+import SeedMobile from '../src/view/seed-mobile';
 import SeedVerify from '../src/view/seed-verify';
 import SetPassword from '../src/view/set-password';
 import SetPasswordMobile from '../src/view/set-password-mobile';
@@ -96,6 +97,7 @@ storiesOf('Screens', module)
     <SelectSeed store={store} wallet={wallet} nav={nav} />
   ))
   .add('Seed', () => <Seed store={store} wallet={wallet} />)
+  .add('Seed (Mobile)', () => <SeedMobile store={store} wallet={wallet} />)
   .add('Seed Verify', () => (
     <SeedVerify store={store} nav={nav} wallet={wallet} />
   ))
