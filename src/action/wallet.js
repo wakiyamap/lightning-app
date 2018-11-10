@@ -349,6 +349,45 @@ class WalletAction {
   }
 
   /**
+   * Initialize the seed view by resetting index values and then navigating to
+   * the view.
+   * @return {undefined}
+   */
+  initSeed() {
+    this._store.wallet.seedIndex = 0;
+    this._nav.goSeed();
+  }
+
+  /**
+   * Initialize the next seed view by setting a new seedIndex or, if all seed
+   * words have been displayed, navigating to the mobile seed verify view.
+   * view.
+   * @return {undefined}
+   */
+  initNextSeedPage() {
+    if (this._store.wallet.seedIndex < 16) {
+      this._store.wallet.seedIndex += 8;
+    } else {
+      // Uncomment when mobile seed verify is implemented.
+      // this.goSeedVerify();
+      this.initSetPassword();
+    }
+  }
+
+  /**
+   * Initialize the previous seed view by setting a new seedIndex or, if on the
+   * first seed page, navigating to the select seed view.
+   * @return {undefined}
+   */
+  initPrevSeedPage() {
+    if (this._store.wallet.seedIndex >= 8) {
+      this._store.wallet.seedIndex -= 8;
+    } else {
+      this._nav.goSelectSeed();
+    }
+  }
+
+  /**
    * Update the current wallet password of the user.
    * @param  {string} options.currentPassword The current password of the user.
    * @param  {string} options.newPassword     The new password of the user.
